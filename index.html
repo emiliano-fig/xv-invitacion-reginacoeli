@@ -214,6 +214,15 @@
     }
     .btn-open:hover { background: var(--oro); color: var(--vino-dark); letter-spacing: 0.35em; }
 
+    /* ===== YOUTUBE HIDDEN FRAME ===== */
+    #yt-frame-wrap {
+      position: fixed;
+      left: -9999px; top: -9999px;
+      width: 1px; height: 1px;
+      overflow: hidden;
+    }
+    #yt-frame-wrap iframe { width: 1px; height: 1px; }
+
     /* ===== FLOATING MUSIC PLAYER ===== */
     #music-player {
       position: fixed;
@@ -1063,9 +1072,16 @@
     <button class="btn-open" id="btn-open-invite">Abrir Invitación</button>
   </div>
 
-  <!-- ===== AUDIO LOCAL DE FONDO ===== -->
-  <!-- TODO: agregar iris.mp3 en la raíz del proyecto -->
-  <audio id="bg-music" src="iris.mp3" loop preload="auto" playsinline></audio>
+  <!-- ===== YOUTUBE HIDDEN PLAYER ===== -->
+  <div id="yt-frame-wrap">
+    <iframe
+      id="yt-player"
+      src="https://www.youtube.com/embed/px5QayCP064?enablejsapi=1&loop=1&playlist=px5QayCP064&controls=0&autoplay=0&playsinline=1&rel=0&modestbranding=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </div>
 
   <!-- ===== FLOATING MUSIC PLAYER ===== -->
   <div id="music-player">
@@ -1401,39 +1417,67 @@
       document.body.classList.add('scrollable');
     }
 
-    /* ----- AUDIO LOCAL ----- */
-    var audio = document.getElementById('bg-music');
-    audio.volume = 0.6;
+    /* ----- YOUTUBE PLAYER API ----- */
+    var ytPlayer;
+    var ytReady = false;
+    var isPlaying = false;
+    var pendingPlay = false;
+
+    window.onYouTubeIframeAPIReady = function () {
+      ytPlayer = new YT.Player('yt-player', {
+        events: {
+          onReady: function () {
+            ytReady = true;
+            if (pendingPlay) {
+              pendingPlay = false;
+              playMusic();
+            }
+          },
+          onStateChange: function (e) {
+            isPlaying = (e.data === YT.PlayerState.PLAYING);
+            updatePlayerUI();
+          }
+        }
+      });
+    };
+
+    (function loadYTAPI() {
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    })();
 
     function playMusic() {
-      var p = audio.play();
-      if (p && typeof p.catch === 'function') {
-        p.catch(function () { /* si el navegador bloquea, el botón flotante lo re-intenta */ });
-      }
+      if (!ytReady) { pendingPlay = true; return; }
+      ytPlayer.unMute && ytPlayer.unMute();
+      ytPlayer.setVolume && ytPlayer.setVolume(60);
+      ytPlayer.playVideo();
       document.getElementById('music-player').classList.add('visible');
-      updatePlayerUI();
     }
 
     function toggleMusic() {
-      if (audio.paused) { audio.play(); }
-      else { audio.pause(); }
-      updatePlayerUI();
-    }
-
-    function updatePlayerUI() {
-      var isPlaying = !audio.paused;
-      var iconPlay  = '<path d="M8 5v14l11-7z"/>';
-      var iconPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-      document.getElementById('icon-play').innerHTML = isPlaying ? iconPause : iconPlay;
-      var waveBars = document.getElementById('wave-bars');
-      waveBars.classList.toggle('paused', !isPlaying);
+      if (!ytReady) { pendingPlay = true; return; }
       if (isPlaying) {
+        ytPlayer.pauseVideo();
+      } else {
+        ytPlayer.unMute && ytPlayer.unMute();
+        ytPlayer.playVideo();
         document.getElementById('music-player').classList.add('visible');
       }
     }
 
-    audio.addEventListener('play', updatePlayerUI);
-    audio.addEventListener('pause', updatePlayerUI);
+    function updatePlayerUI() {
+      var iconPlay  = '<path d="M8 5v14l11-7z"/>';
+      var iconPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+      document.getElementById('icon-play').innerHTML = isPlaying ? iconPause : iconPlay;
+      var waveBars = document.getElementById('wave-bars');
+      if (isPlaying) {
+        waveBars.classList.remove('paused');
+        document.getElementById('music-player').classList.add('visible');
+      } else {
+        waveBars.classList.add('paused');
+      }
+    }
 
     document.getElementById('btn-play').addEventListener('click', toggleMusic);
     document.getElementById('btn-play-hero').addEventListener('click', function () {
