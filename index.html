@@ -185,7 +185,8 @@
       justify-content: center;
       transition: transform 0.7s cubic-bezier(0.4,0,0.2,1) 0.3s, opacity 0.5s ease 0.3s;
       opacity: 0;
-      z-index: 2;
+      z-index: 5;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
     }
     .env-card span {
       font-family: 'Cormorant SC', serif;
@@ -195,7 +196,7 @@
       letter-spacing: 0.15em;
     }
     .envelope-wrap.open .env-card {
-      transform: translateX(-50%) translateY(-90px);
+      transform: translateX(-50%) translateY(-120px);
       opacity: 1;
     }
     .btn-open {
@@ -344,9 +345,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       text-align: center;
-      padding: 60px 24px 100px;
+      padding: 60px 24px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -388,19 +389,20 @@
     .hero-content { position: relative; z-index: 1; isolation: isolate; }
     .hero-small {
       font-family: 'Cormorant SC', serif;
-      font-size: clamp(0.8rem, 2.5vw, 1rem);
-      color: rgba(255,255,255,0.75);
+      font-size: clamp(1rem, 3.2vw, 1.25rem);
+      color: rgba(255,255,255,0.9);
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .hero-name {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
-      font-size: clamp(4rem, 14vw, 8rem);
+      font-size: clamp(3.4rem, 12vw, 6.5rem);
       color: #fff;
-      line-height: 1;
-      margin-bottom: 12px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      padding: 0 12px;
       background: linear-gradient(90deg, #fff 0%, var(--oro-light) 50%, #fff 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -408,14 +410,6 @@
       -webkit-text-fill-color: transparent;
       animation: shimmer 5s linear infinite;
       filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
-    }
-    .hero-surname {
-      font-family: 'Cormorant SC', serif;
-      font-weight: 300;
-      font-size: clamp(1rem, 3.5vw, 1.6rem);
-      color: var(--oro-light);
-      letter-spacing: 0.4em;
-      margin-bottom: 28px;
     }
     .hero-line {
       width: 60px;
@@ -438,23 +432,23 @@
     .hero-date {
       font-family: 'Cormorant SC', serif;
       font-weight: 400;
-      font-size: clamp(0.9rem, 2.8vw, 1.15rem);
-      color: rgba(255,255,255,0.85);
+      font-size: clamp(1rem, 3.2vw, 1.3rem);
+      color: rgba(255,255,255,0.95);
       letter-spacing: 0.3em;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .btn-play-hero {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       font-family: 'Cormorant SC', serif;
-      font-size: 0.85rem;
+      font-size: clamp(0.95rem, 3vw, 1.1rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--oro-light);
       background: rgba(42,8,24,0.35);
       border: 1.5px solid var(--oro-light);
-      padding: 13px 32px;
+      padding: 15px 36px;
       border-radius: 3px;
       cursor: pointer;
       transition: all 0.3s;
@@ -846,7 +840,7 @@
     .boots-illustration {
       width: 100%;
       max-width: 260px;
-      margin: 0 auto 28px;
+      margin: 28px auto 32px;
       animation: float 4s ease-in-out infinite;
     }
     .boots-illustration img {
@@ -1124,7 +1118,6 @@
     <div class="hero-content">
       <p class="hero-small" data-aos="fade-down" data-aos-duration="900">Mis XV Años</p>
       <h1 class="hero-name" data-aos="zoom-in" data-aos-duration="1400" data-aos-delay="100">Regina Coeli</h1>
-      <p class="hero-surname" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">Figueroa Carrillo</p>
       <div class="hero-line" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500"></div>
       <p class="hero-date" data-aos="fade-up" data-aos-duration="900" data-aos-delay="600">19 &nbsp;&middot;&nbsp; Septiembre &nbsp;&middot;&nbsp; 2026</p>
       <button class="btn-play-hero" id="btn-play-hero" data-aos="fade-up" data-aos-duration="900" data-aos-delay="800">
@@ -1140,15 +1133,8 @@
     <div class="section-divider" data-aos="fade-up"><span>✦</span></div>
 
     <p class="familia-honor" data-aos="fade-up" data-aos-delay="50">Con el amor de</p>
-    <p class="familia-honor-title" data-aos="fade-up" data-aos-delay="100">
-      Tenemos el honor de invitarlos<br>a celebrar mis XV Años
-    </p>
 
-    <p class="quote-text" data-aos="fade-up" data-aos-duration="1100">
-      Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que más quieres los hace inolvidables.
-    </p>
-
-    <div class="familia-grid">
+    <div class="familia-grid" style="margin-bottom: 48px;">
       <div class="familia-block" data-aos="fade-right" data-aos-duration="1000">
         <div class="familia-label">Mis Padres</div>
         <p class="familia-name">
@@ -1164,6 +1150,14 @@
         </p>
       </div>
     </div>
+
+    <p class="familia-honor-title" data-aos="fade-up" data-aos-delay="100">
+      Tenemos el honor de invitarlos<br>a celebrar mis XV Años
+    </p>
+
+    <p class="quote-text" data-aos="fade-up" data-aos-duration="1100">
+      Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que más quieres los hace inolvidables.
+    </p>
   </section>
 
   <!-- ===== SECCIÓN 3: COUNTDOWN (con foto de fondo) ===== -->
@@ -1304,17 +1298,14 @@
     <div class="section-divider" data-aos="fade-up"><span>✦</span></div>
     <h2 class="section-title" data-aos="fade-up">Código de Vestimenta</h2>
 
+    <p class="dress-sub" data-aos="fade-up">Vestimenta</p>
+    <p class="dress-main" data-aos="zoom-in" data-aos-duration="900" data-aos-delay="100">Con Tejana y Botas</p>
+
     <!-- Ilustración de tejana y botas -->
-    <div class="boots-illustration" data-aos="zoom-in" data-aos-duration="1100">
+    <div class="boots-illustration" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="200">
       <img src="Foto-Vestimenta.jpeg" alt="Tejana y botas vaqueras">
     </div>
 
-    <p class="dress-sub" data-aos="fade-up">Vestimenta</p>
-    <p class="dress-main" data-aos="zoom-in" data-aos-duration="900" data-aos-delay="100">Casual Elegante</p>
-    <p class="dress-note" data-aos="fade-up" data-aos-delay="200">
-      <strong style="color:var(--vino-dark);">¡Tejana y botas son bienvenidas!</strong><br>
-      Ven cómod@ y disfruta la fiesta al máximo.
-    </p>
     <div class="dress-alert" data-aos="fade-up" data-aos-delay="300">
       <p class="dress-alert-title">🌸 Nota especial para nuestros invitados</p>
       <p class="dress-alert-text">Con todo el cariño del mundo, les pedimos que los tonos <strong>rosa, champagne y taupe</strong> queden reservados exclusivamente para nuestra festejada. ¡Gracias por hacerlo aún más especial! 💕</p>
