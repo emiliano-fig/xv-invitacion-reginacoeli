@@ -345,11 +345,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       text-align: center;
-      padding: 60px 24px 80px;
+      padding: 80px 24px 80px;
       position: relative;
       overflow: hidden;
+    }
+    .hero-top {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    .hero-bottom {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      isolation: isolate;
     }
     #hero::before {
       content: '';
@@ -364,15 +375,23 @@
       );
     }
     /* Backdrop suave solo detrás del texto para que siempre contraste */
-    #hero .hero-content::before {
+    #hero .hero-bottom::before {
       content: '';
       position: absolute;
-      inset: -40px -24px;
-      background: radial-gradient(ellipse at center, rgba(42,8,24,0.55) 0%, rgba(42,8,24,0) 70%);
+      inset: -30px -24px;
+      background: radial-gradient(ellipse at center, rgba(42,8,24,0.55) 0%, rgba(42,8,24,0) 75%);
       z-index: -1;
-      border-radius: 50%;
       pointer-events: none;
     }
+    #hero .hero-top::before {
+      content: '';
+      position: absolute;
+      inset: -20px -24px;
+      background: radial-gradient(ellipse at center, rgba(42,8,24,0.45) 0%, rgba(42,8,24,0) 75%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    #hero .hero-top { isolation: isolate; }
     /* Sparkles decorativos en el hero */
     #hero .sparkle {
       position: absolute;
@@ -389,20 +408,22 @@
     .hero-content { position: relative; z-index: 1; isolation: isolate; }
     .hero-small {
       font-family: 'Cormorant SC', serif;
-      font-size: clamp(1rem, 3.2vw, 1.25rem);
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 0.4em;
+      font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 0.45em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin: 0;
+      text-align: center;
     }
     .hero-name {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
-      font-size: clamp(3.4rem, 12vw, 6.5rem);
+      font-size: clamp(4rem, 14vw, 7.5rem);
       color: #fff;
-      line-height: 1.05;
-      margin-bottom: 20px;
-      padding: 0 12px;
+      line-height: 1.3;
+      margin: 0 auto 24px;
+      padding: 10px 16px 20px;
+      text-align: center;
       background: linear-gradient(90deg, #fff 0%, var(--oro-light) 50%, #fff 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -432,23 +453,24 @@
     .hero-date {
       font-family: 'Cormorant SC', serif;
       font-weight: 400;
-      font-size: clamp(1rem, 3.2vw, 1.3rem);
+      font-size: clamp(1.15rem, 3.8vw, 1.5rem);
       color: rgba(255,255,255,0.95);
-      letter-spacing: 0.3em;
-      margin-bottom: 36px;
+      letter-spacing: 0.35em;
+      margin-bottom: 40px;
+      text-align: center;
     }
     .btn-play-hero {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-family: 'Cormorant SC', serif;
-      font-size: clamp(0.95rem, 3vw, 1.1rem);
-      letter-spacing: 0.3em;
+      font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--oro-light);
       background: rgba(42,8,24,0.35);
       border: 1.5px solid var(--oro-light);
-      padding: 15px 36px;
+      padding: 17px 42px;
       border-radius: 3px;
       cursor: pointer;
       transition: all 0.3s;
@@ -1115,8 +1137,10 @@
     <span class="sparkle">✦</span>
     <span class="sparkle">✦</span>
     <span class="sparkle">✦</span>
-    <div class="hero-content">
+    <div class="hero-top">
       <p class="hero-small" data-aos="fade-down" data-aos-duration="900">Mis XV Años</p>
+    </div>
+    <div class="hero-bottom">
       <h1 class="hero-name" data-aos="zoom-in" data-aos-duration="1400" data-aos-delay="100">Regina Coeli</h1>
       <div class="hero-line" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500"></div>
       <p class="hero-date" data-aos="fade-up" data-aos-duration="900" data-aos-delay="600">19 &nbsp;&middot;&nbsp; Septiembre &nbsp;&middot;&nbsp; 2026</p>
