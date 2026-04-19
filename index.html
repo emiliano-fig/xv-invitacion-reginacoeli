@@ -314,6 +314,25 @@
       position: relative;
     }
 
+    /* ===== MARCO DORADO FLORAL ===== */
+    .has-frame {
+      padding: 100px 32px 100px !important;
+    }
+    .has-frame::before {
+      content: '';
+      position: absolute;
+      inset: 24px 16px;
+      background: url('marco-dorado.svg') center center / 100% 100% no-repeat;
+      pointer-events: none;
+      opacity: 0.95;
+      z-index: 0;
+    }
+    .has-frame > * { position: relative; z-index: 1; }
+    @media (max-width: 480px) {
+      .has-frame { padding: 90px 26px 90px !important; }
+      .has-frame::before { inset: 20px 12px; }
+    }
+
     /* ===== SECTION TITLE ===== */
     .section-title {
       font-family: 'Cormorant SC', serif;
@@ -345,22 +364,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       text-align: center;
-      padding: 80px 24px 80px;
+      padding: 60px 24px;
       position: relative;
       overflow: hidden;
     }
     .hero-top {
-      position: relative;
+      position: absolute;
+      top: clamp(60px, 10vh, 110px);
+      left: 0;
+      right: 0;
       z-index: 1;
-      width: 100%;
+      isolation: isolate;
     }
     .hero-bottom {
       position: relative;
       z-index: 1;
       width: 100%;
       isolation: isolate;
+      margin-top: 20px;
     }
     #hero::before {
       content: '';
@@ -1153,7 +1176,7 @@
   </section>
 
   <!-- ===== SECCIÓN 2: FAMILIA ===== -->
-  <section id="familia">
+  <section id="familia" class="has-frame">
     <div class="section-divider" data-aos="fade-up"><span>✦</span></div>
 
     <p class="familia-honor" data-aos="fade-up" data-aos-delay="50">Con el amor de</p>
@@ -1218,7 +1241,7 @@
   </section>
 
   <!-- ===== SECCIÓN 4: SANTA MISA / TEMPLO ===== -->
-  <section id="templo">
+  <section id="templo" class="has-frame">
     <div class="section-divider" data-aos="fade-up"><span>⛪</span></div>
     <h2 class="section-title" data-aos="fade-up">Misa</h2>
     <div class="templo-wrap">
@@ -1238,7 +1261,7 @@
   </section>
 
   <!-- ===== SECCIÓN 4B: CASINO / RECEPCIÓN ===== -->
-  <section id="casino">
+  <section id="casino" class="has-frame">
     <div class="section-divider" data-aos="fade-up"><span>✦</span></div>
     <h2 class="section-title" data-aos="fade-up">Recepción</h2>
     <div class="templo-wrap">
@@ -1258,7 +1281,7 @@
   </section>
 
   <!-- ===== SECCIÓN 5: PROGRAMA DEL DÍA ===== -->
-  <section id="itinerary">
+  <section id="itinerary" class="has-frame">
     <div class="section-divider" data-aos="fade-up"><span>✦</span></div>
     <h2 class="section-title" data-aos="fade-up">Programa del Día</h2>
     <div class="itinerary-list">
@@ -1337,7 +1360,7 @@
   </section>
 
   <!-- ===== SECCIÓN 7: LLUVIA DE SOBRES ===== -->
-  <section id="lluvia">
+  <section id="lluvia" class="has-frame">
     <div class="section-divider" data-aos="fade-up"><span>✦</span></div>
     <h2 class="section-title" data-aos="fade-up">Lluvia de Sobres</h2>
     <span class="lluvia-icon" data-aos="zoom-in" data-aos-duration="900">💌</span>
